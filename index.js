@@ -19,7 +19,43 @@ app.get("/", (req, res) => {
 app.post("/recipe", (req, res) => {
   //Step 3: Write your code here to make this behave like the solution website.
   //Step 4: Add code to views/index.ejs to use the recieved recipe object.
-});
+  let object = JSON.parse(recipeJSON);
+
+  if(req.body.choice==='chicken'){
+    console.log(object[0].ingredients.protein.name);
+    res.render("index.ejs",{
+      proteinName: object[0].ingredients.protein.name,
+      proteinPreparatrion : object[0].ingredients.protein.preparation,
+      salsaName: object[0].ingredients.salsa.name,
+      topping:  object[0].ingredients.toppings[0].ingredients[0]+", "+ object[0].ingredients.toppings[0].quantity
+      +"\n"+ object[0].ingredients.toppings[1].name+", "+ object[0].ingredients.toppings[1].quantity
+      +"\n"+ object[0].ingredients.toppings[2].name+", "+ object[0].ingredients.toppings[2].quantity
+    });
+  }else if(req.body.choice==='beef'){
+    console.log(object[1].ingredients.protein.name);
+    res.render("index.ejs",{
+      proteinName: object[1].ingredients.protein.name,
+      proteinPreparatrion : object[1].ingredients.protein.preparation,
+      salsaName: object[1].ingredients.salsa.name,
+      topping:  object[1].ingredients.toppings[0].ingredients[0]+", "+ object[0].ingredients.toppings[0].quantity
+      +"\n"+ object[0].ingredients.toppings[1].name+", "+ object[0].ingredients.toppings[1].quantity
+      +"\n"+ object[0].ingredients.toppings[2].name+", "+ object[0].ingredients.toppings[2].quantity
+    });
+  }else{
+    console.log(object[2].ingredients.protein.name);
+    res.render("index.ejs",{
+      proteinName: object[2].ingredients.protein.name,
+      proteinPreparatrion : object[2].ingredients.protein.preparation,
+      salsaName: object[2].ingredients.salsa.name,
+      topping: object[2].ingredients.toppings[0].ingredients[0]+", "+ object[0].ingredients.toppings[0].quantity
+      +"\n"+ object[0].ingredients.toppings[1].name+", "+ object[0].ingredients.toppings[1].quantity
+      +"\n"+ object[0].ingredients.toppings[2].name+", "+ object[0].ingredients.toppings[2].quantity
+    });
+  }
+  });
+  //res.render("index.ejs");
+  
+
 
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`);
